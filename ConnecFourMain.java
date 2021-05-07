@@ -3,5 +3,10 @@ public class ConnecFourMain {
         Board b = new Board();
 
         b.display();
+
+        Coin c = new Coin("Red");
+        b.insert(c, 3, 2);
+
+        b.display();
     }
 }
