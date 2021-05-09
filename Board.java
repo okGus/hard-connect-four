@@ -27,7 +27,14 @@ public class Board {
         }
     }
 
+    // insert new Coin and have update to setColor(getColor)
     public void insert(Coin c, int row, int col) {
+        _board[row][col] = new Coin();
+
+        update(c, row, col);
+    }
+
+    private void update(Coin c, int row, int col) {
         _board[row][col].setColor(c.getColor());
     }
 

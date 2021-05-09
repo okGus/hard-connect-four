@@ -4,8 +4,14 @@ public class ConnecFourMain {
 
         b.display();
 
-        Coin c = new Coin("Red");
-        b.insert(c, 3, 2);
+        RedCoin rc = new RedCoin();
+        YellowCoin yc = new YellowCoin();
+
+        b.insert(rc, 3, 4);
+        //b.update(rc, 3, 4);
+
+        b.insert(yc, 0, 0);
+        //b.update(yc, 0, 0);
 
         b.display();
     }
