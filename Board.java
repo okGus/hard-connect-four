@@ -1,4 +1,3 @@
-
 public class Board {
 	Coin[][] _board;
     boolean connect_four = true;
