@@ -50,6 +50,25 @@ public class Board {
      * @param col - column of board
      */
     public void insert(Coin c, int row, int col) {
+        if(_board[row][col] != null)
+        {
+            System.out.println("There are something here.");
+            return;
+        }
+
+        boolean hasCoinUnder = false;
+
+        while(!hasCoinUnder  && row + 1 < _board.length)
+        {
+            if(_board[row+1][col] != null)
+            {
+                hasCoinUnder = true;
+            }
+            else
+            {
+                row++;
+            }
+        }
         _board[row][col] = new Coin();
         System.out.println("Checking over in insert");
         update(c, row, col);
