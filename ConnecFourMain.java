@@ -1,18 +1,170 @@
-public class ConnecFourMain {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import javafx.scene.text.Font;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+public class ConnecFourMain extends Application {
     public static void main(String[] args) {
-        Board b = new Board();
+        launch();
+    }
 
-        b.display();
+    @Override
+    public void start(Stage stage) {
+        // Set tile
+        stage.setTitle("Connect Four");
 
-        RedCoin rc = new RedCoin();
-        YellowCoin yc = new YellowCoin();
+        // Dimension of screen
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
 
-        b.insert(rc, 3, 4);
-        //b.update(rc, 3, 4);
+        // Intro Scene - label
+        Label intro_label = new Label("Welcome to Connect Four");
+        intro_label.setFont(new Font("Arial", 30));
+        intro_label.relocate((width/2 - 180), 150);
+        
+        // Intro Scene - button
+        Button one_player_button = new Button("1 Player");
+        one_player_button.setFont(new Font("Times New Roman", 20));
+        one_player_button.setMinHeight(30);
+        one_player_button.setMaxHeight(40);
+        one_player_button.setMinWidth(200);
+        one_player_button.setMaxWidth(400);
+        one_player_button.setPrefHeight(250);
+        one_player_button.setPrefWidth(35);
 
-        b.insert(yc, 0, 0);
-        //b.update(yc, 0, 0);
+        Button two_players_button = new Button("2 Players");
+        two_players_button.setFont(new Font("Times New Roman", 20));
+        two_players_button.setMinHeight(30);
+        two_players_button.setMaxHeight(40);
+        two_players_button.setMinWidth(200);
+        two_players_button.setMaxWidth(400);
+        two_players_button.setPrefHeight(250);
+        two_players_button.setPrefWidth(35);
 
-        b.display();
+        // Intro Scene - one player settings
+        Label one_player_label = new Label("Choose your color");
+        one_player_label.setFont(new Font("Arial", 20));
+
+        RadioButton yellow_button = new RadioButton("Yellow Coin");
+        yellow_button.setFont(new Font("Times New Roman", 15));
+
+        RadioButton red_button = new RadioButton("Red Coin");
+        red_button.setFont(new Font("Times New Roman", 15));
+
+        ToggleGroup coin_buttons = new ToggleGroup();
+        yellow_button.setToggleGroup(coin_buttons);
+        red_button.setToggleGroup(coin_buttons);
+
+        VBox emptyOne = new VBox();
+        VBox emptyTwo = new VBox();
+        VBox coin_options = new VBox(5, one_player_label, yellow_button, red_button);
+        VBox one_player_settings = new VBox(one_player_button, coin_options);
+
+        // Intro Scene - two players settings
+        VBox two_players_settings = new VBox(two_players_button);
+
+        // Intro Scene - AI and play
+        Label ai_label = new Label("Choose AI level");
+        ai_label.setFont(new Font("Arial", 20));
+
+        RadioButton ai_button_one = new RadioButton("Level 1");
+        ai_button_one.setFont(new Font("Times New Roman", 15));
+
+        RadioButton ai_button_two = new RadioButton("Level 2");
+        ai_button_two.setFont(new Font("Times New Roman", 15));
+
+        ToggleGroup ai_buttons = new ToggleGroup();
+        ai_button_one.setToggleGroup(ai_buttons);
+        ai_button_two.setToggleGroup(ai_buttons);
+
+        VBox ai_setting = new VBox(5, ai_label, ai_button_one, ai_button_two);
+
+        // Intro Scene - play button
+        Button play_button = new Button("Play");
+        play_button.setFont(new Font("Times New Roman", 20));
+        play_button.setMinHeight(30);
+        play_button.setMaxHeight(40);
+        play_button.setMinWidth(200);
+        play_button.setMaxWidth(400);
+        play_button.setPrefHeight(250);
+        play_button.setPrefWidth(35);
+
+        // Intro Scene - all settings combined
+        HBox settings = new HBox(20, one_player_settings, two_players_settings);
+        settings.relocate((width/2 - 200), (height/2 - 100));
+
+        // Button actions
+        two_players_button.setOnAction(e -> {
+            one_player_settings.getChildren().setAll(one_player_button, emptyOne);
+            settings.getChildren().setAll(one_player_settings, two_players_settings);
+            ai_setting.getChildren().setAll(ai_label, ai_button_one, ai_button_two);
+            yellow_button.setSelected(false);
+            red_button.setSelected(false);
+            ai_button_one.setSelected(false);
+            ai_button_two.setSelected(false);
+            // instantiate two separate player
+        });
+
+        one_player_button.setOnAction(e -> {
+            one_player_settings.getChildren().setAll(one_player_button, coin_options);
+            settings.getChildren().setAll(one_player_settings, two_players_settings);
+            ai_setting.getChildren().setAll(ai_label, ai_button_one, ai_button_two);
+            yellow_button.setSelected(false);
+            red_button.setSelected(false);
+            ai_button_one.setSelected(false);
+            ai_button_two.setSelected(false);
+            // instantiate player
+        });
+
+        yellow_button.setOnAction(e -> {
+            // instantiate player with yellow coin
+            settings.getChildren().setAll(one_player_settings, two_players_settings, ai_setting);
+        });
+
+        red_button.setOnAction(e -> {
+            // instantiate player with red coin
+            settings.getChildren().setAll(one_player_settings, two_players_settings, ai_setting);
+        });
+
+        ai_button_one.setOnAction(e -> {
+            // instantiate simple ai
+            ai_setting.getChildren().setAll(ai_label, ai_button_one, ai_button_two, play_button);
+        });
+
+        ai_button_two.setOnAction(e -> {
+            // instantiate complex ai
+            ai_setting.getChildren().setAll(ai_label, ai_button_one, ai_button_two, play_button);
+        });
+
+        play_button.setOnAction(e -> {
+            // Switch to game scene
+            game(stage);
+        });
+
+        Pane intro_pane = new Pane(intro_label, settings);
+        Scene intro_scene = new Scene(intro_pane, width, height);
+
+        stage.setScene(intro_scene);
+        stage.setResizable(true);
+        stage.show();
+    }
+
+    public void game(Stage secondary_stage) {
+        Label test = new Label("Test");
+        Scene game_scene = new Scene(test);
+
+        secondary_stage.setScene(game_scene);
     }
 }
