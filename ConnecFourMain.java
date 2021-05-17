@@ -175,8 +175,6 @@ public class ConnecFourMain extends Application {
     }
 
     public void game(Stage secondary_stage) {
-        Pane secondary_pane = new Pane();
-        Scene game_scene = new Scene(secondary_pane);
 
         // creating the circle objects
         Circle[][] circle = new Circle[8][8];
@@ -264,6 +262,9 @@ public class ConnecFourMain extends Application {
 
         // Setting the back ground color
         labels.setStyle("-fx-background-color: BLUE;");
+
+        // Create a Scene with the HBox as its root node.
+        Scene game_scene = new Scene(labels, 600, 600);
 
         secondary_stage.setScene(game_scene);
         secondary_stage.show();
