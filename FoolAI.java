@@ -3,8 +3,7 @@ import java.lang.Math;
 //@Param = Board for changing data inside
 
 public class FoolAI extends Player implements playerInterface{
-	
-	
+
 	public FoolAI(String color)
 	{
 		super(color);
@@ -40,5 +39,4 @@ public class FoolAI extends Player implements playerInterface{
 		b.insert(c,row,col);
 		return b;	
 	}
-
 }

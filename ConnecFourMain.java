@@ -10,6 +10,15 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
+import javafx.scene.paint.Color;
+import javafx.scene.input.MouseEvent;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.shape.Shape;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -24,6 +33,9 @@ public class ConnecFourMain extends Application {
         // Set tile
         stage.setTitle("Connect Four");
 
+        Player ai;
+        Player user;
+
         // Dimension of screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
@@ -32,8 +44,8 @@ public class ConnecFourMain extends Application {
         // Intro Scene - label
         Label intro_label = new Label("Welcome to Connect Four");
         intro_label.setFont(new Font("Arial", 30));
-        intro_label.relocate((width/2 - 180), 150);
-        
+        intro_label.relocate((width / 2 - 180), 150);
+
         // Intro Scene - button
         Button one_player_button = new Button("1 Player");
         one_player_button.setFont(new Font("Times New Roman", 20));
@@ -68,7 +80,6 @@ public class ConnecFourMain extends Application {
         red_button.setToggleGroup(coin_buttons);
 
         VBox emptyOne = new VBox();
-        VBox emptyTwo = new VBox();
         VBox coin_options = new VBox(5, one_player_label, yellow_button, red_button);
         VBox one_player_settings = new VBox(one_player_button, coin_options);
 
@@ -103,7 +114,7 @@ public class ConnecFourMain extends Application {
 
         // Intro Scene - all settings combined
         HBox settings = new HBox(20, one_player_settings, two_players_settings);
-        settings.relocate((width/2 - 200), (height/2 - 100));
+        settings.relocate((width / 2 - 200), (height / 2 - 100));
 
         // Button actions
         two_players_button.setOnAction(e -> {
@@ -141,11 +152,13 @@ public class ConnecFourMain extends Application {
         ai_button_one.setOnAction(e -> {
             // instantiate simple ai
             ai_setting.getChildren().setAll(ai_label, ai_button_one, ai_button_two, play_button);
+            // ai = new FoolAI();
         });
 
         ai_button_two.setOnAction(e -> {
             // instantiate complex ai
             ai_setting.getChildren().setAll(ai_label, ai_button_one, ai_button_two, play_button);
+            // ai = new SmartAI();
         });
 
         play_button.setOnAction(e -> {
@@ -163,7 +176,97 @@ public class ConnecFourMain extends Application {
 
     public void game(Stage secondary_stage) {
 
+        // creating the circle objects
+        Circle[][] circle = new Circle[8][8];
 
-        //secondary_stage.setScene(game_scene);
+        // storing the gameboard in an Image variable
+        Image image = new Image("file:Connect4GameBoard.png");
+        ImageView imageView = new ImageView(image);
+
+        // setting the width and height of the image
+        imageView.setFitWidth(600);
+        imageView.setFitHeight(600);
+        imageView.setPreserveRatio(true);
+
+        // SETTNG THE COORDINATES FOR THE FIRST CIRCLE
+        float xCoord = 70.0f;
+        float yCoord = 38.0f;
+        float radius = 30.0f;
+
+        // for loop for placing the circles on the board
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+
+                // initializing circle objects
+                circle[i][j] = new Circle();
+                // Circle
+                circle[i][j].setCenterX((float) xCoord);
+                circle[i][j].setCenterY((float) yCoord);
+                circle[i][j].setRadius((float) radius);
+
+                // Setting color to the circle
+                circle[i][j].setFill(Color.WHITE);
+
+                // Setting the stroke width
+                circle[i][j].setStrokeWidth(3);
+
+                // Setting color to the stroke
+                circle[i][j].setStroke(Color.DARKBLUE);
+
+                // CHANGING THE COLOR OF THE CIRCLE WHEN CLICKED
+                circle[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent e) {
+                        ((Shape) e.getSource()).setFill(Color.BLUE);
+                    }
+                });
+
+                xCoord += 70;
+                // checking if i is the 8th item in the row and then placing the circles in the
+                // next row
+                // removing the "drifting" of the circles away from the game board
+                if (j == 7) {
+                    yCoord += 65;
+                    xCoord = 70.0f;
+                }
+
+                if (i == 1 && j == 0) {
+                    yCoord += 5;
+
+                }
+                if (i == 2 && j == 0) {
+                    yCoord += 10;
+
+                }
+                if (i == 4 && j == 0) {
+                    yCoord += 10;
+
+                }
+                if (i == 6 && j == 0) {
+                    yCoord += 5;
+
+                }
+
+            }
+        } // end of for loop
+
+        // Create an gridPane container and add the Labels.
+        Group labels = new Group();
+        labels.getChildren().add(imageView);
+        // adding each one of the circle objects
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                labels.getChildren().add(circle[i][j]);
+            }
+        }
+
+        // Setting the back ground color
+        labels.setStyle("-fx-background-color: BLUE;");
+
+        // Create a Scene with the HBox as its root node.
+        Scene game_scene = new Scene(labels, 600, 600);
+
+        secondary_stage.setScene(game_scene);
+        secondary_stage.show();
     }
 }
