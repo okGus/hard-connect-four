@@ -162,9 +162,8 @@ public class ConnecFourMain extends Application {
     }
 
     public void game(Stage secondary_stage) {
-        Label test = new Label("Test");
-        Scene game_scene = new Scene(test);
 
-        secondary_stage.setScene(game_scene);
+
+        //secondary_stage.setScene(game_scene);
     }
 }

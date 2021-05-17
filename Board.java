@@ -7,9 +7,9 @@ public class Board {
 
     Board() {
         // Default 8x8 - connect four
-        _board = new Coin[6][7];
         boardLength = 8;
         boardHeight = 8;
+		_board = new Coin[boardHeight][boardLength];
         seqNum = 4;
         for (int r = 0; r < _board.length; r++) {
             for (int c = 0; c < _board[r].length; c++) {
