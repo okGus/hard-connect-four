@@ -2,7 +2,7 @@ import java.lang.Math;
 //This is a fool AI that inserts coin at random position
 //@Param = Board for changing data inside
 
-public class FoolAI extends Player{
+public class FoolAI extends Player implements playerInterface{
 	
 	
 	public FoolAI(String color)
@@ -10,14 +10,15 @@ public class FoolAI extends Player{
 		super(color);
 	}
 	
-	public Board act(Board b)
+	@Override
+	public Board act(Board b) 
 	{
 		//check what board the game is playing
 		boolean checkC4 = b.get_connect_four();
 		boolean checkC5 = b.get_connect_five();
 		//create a new coin which represent AI coin
 		Coin c = new Coin(color);
-		
+				
 		//int for taking value of the position where the AI is going to put the coin at
 		//default at [0,0], but will change later
 		int row = 0; 
@@ -37,7 +38,7 @@ public class FoolAI extends Player{
 		}
 		//insert the coin to the board and return it
 		b.insert(c,row,col);
-		return b;
-		
+		return b;	
 	}
+
 }

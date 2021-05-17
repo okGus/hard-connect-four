@@ -1,7 +1,7 @@
 //this class is for player movement and the base of AI.
 //value taking from clicking on javafx screen
 //@Param = Board for changing data inside
-public abstract class Player {
+public abstract class Player{
 
 	protected String color;
 	
