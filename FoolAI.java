@@ -12,6 +12,9 @@ public class FoolAI extends Player implements playerInterface{
 	@Override
 	public Board act(Board b) 
 	{
+		//hasValue = check if the position ai choose randomly has coin inside already
+		//rechoose number if so
+		boolean noValue = true;
 		//check what board the game is playing
 		boolean checkC4 = b.get_connect_four();
 		boolean checkC5 = b.get_connect_five();
@@ -24,17 +27,30 @@ public class FoolAI extends Player implements playerInterface{
 		int col = 0;
 		//generate random number for both row and column
 		//6*7 board for connect-four
-		if(checkC4)
+		do
 		{
-			row = (int)(Math.random() * 8-1+1) + 1;
-			col = (int)(Math.random() * 8-1+1) + 1;
-		}
-		//6*9 board for connect-five
-		if(checkC5)
-		{
-			row = (int)(Math.random() * 8-1+1) + 1;
-			col = (int)(Math.random() * 8-1+1) + 1;
-		}
+			if(checkC4)
+			{
+				row = (int)(Math.random() * 8-1+1) + 1;
+				col = (int)(Math.random() * 8-1+1) + 1;
+			}
+			//6*9 board for connect-five
+			if(checkC5)
+			{
+				row = (int)(Math.random() * 8-1+1) + 1;
+				col = (int)(Math.random() * 8-1+1) + 1;
+			}
+			//choose new number of row and col if there is coin in position the ai firstly choose
+			if(!(b.[row][col] == null))
+			{
+				noValue = false;
+			}
+			else
+			{
+				noValue = true;
+			}
+		}while(!noValue);
+		
 		//insert the coin to the board and return it
 		b.insert(c,row,col);
 		return b;	
