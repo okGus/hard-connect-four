@@ -1,15 +1,15 @@
 public class Board {
-    Boolean winOrNot;
+    private Boolean winOrNot;
     private Coin[][] _board;
     private boolean connect_four = true;
     private boolean connect_five = false;
     private int currHor, currVer, boardLength, boardHeight, seqNum;
 
     Board() {
-        // Default 6x7 - connect four
+        // Default 8x8 - connect four
         _board = new Coin[6][7];
-        boardLength = 7;
-        boardHeight = 6;
+        boardLength = 8;
+        boardHeight = 8;
         seqNum = 4;
         for (int r = 0; r < _board.length; r++) {
             for (int c = 0; c < _board[r].length; c++) {
