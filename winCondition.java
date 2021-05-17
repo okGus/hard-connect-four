@@ -1,100 +1,30 @@
-public class Board {
-    Boolean winOrNot;
-    private Coin[][] _board;
-    private boolean connect_four = true;
-    private boolean connect_five = false;
-    private int currHor, currVer, boardLength, boardHeight, seqNum;
 
-    Board() {
-        // Default 6x7 - connect four
-        _board = new Coin[6][7];
-        boardLength = 7;
-        boardHeight = 6;
-        seqNum = 4;
-        for (int r = 0; r < _board.length; r++) {
-            for (int c = 0; c < _board[r].length; c++) {
-                _board[r][c] = new Coin();
-            }
-        }
-    }
 
-    Board(int row, int col) {
-        _board = new Coin[row][col];
-    }
-
-    public void display() {
-        for (int r = 0; r < _board.length; r++) {
-            for (int c = 0; c < _board[r].length; c++) {
-                System.out.print(r + "," + c + _board[r][c].getColor() + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    // insert new Coin and have update to setColor(getColor)
-    public void insert(Coin c, int row, int col) {
-        if(_board[row][col] != null)
-        {
-            System.out.println("There are something here.");
-            return;
-        }
-
-        boolean hasCoinUnder = false;
-
-        while(!hasCoinUnder  && row + 1 < _board.length)
-        {
-            if(_board[row+1][col] != null)
-            {
-                hasCoinUnder = true;
-            }
-            else
-            {
-                row++;
-            }
-        }
-
-        _board[row][col] = new Coin();
-        System.out.println("Checking over in insert");
-        update(c, row, col);
-    }
-
-    private void update(Coin c, int row, int col) {
-        _board[row][col].setColor(c.getColor());
-        System.out.println("Checking over in update");
-        boolean w = gameOver(this, c, row, col);
-    }
-
-    public void five_in_a_row() {
-        // connect five, 6x9
-        _board = new Coin[6][9];
-        boardLength = 9;
-        boardHeight = 6;
-        seqNum = 5;
-        connect_five = true;
-        connect_four = false;
-    }
-
-    public boolean get_connect_four() {
-        return connect_four;
-    }
-
-    public boolean get_connect_five() {
-        return connect_five;
-    }
-    
-    /**
-     * Returns board state
-     * @return - _board
-     */
-    public Coin[][] getBoard()
-    {
-    	return _board;
-    }
-    
-    /**
-     * Checks whether it is in a sequence of connect 4 or 5
-     */
-    public boolean gameOver(Board _board, Coin c, int row, int col) 
+public class winCondition {
+	
+	int seqNum;//Amount needed in sequence of eachother
+	int boardLength, boardHeight;//board dimensions
+	int currHor, currVer;//for the search method
+	
+	public winCondition(Board _board) 
+	{
+		//
+		if(_board.get_connect_four() == false)//If not connect 4 must be connect 5
+		{
+			seqNum = 5;
+			boardLength = 9;
+			boardHeight = 6;
+		}
+		else
+		{
+			seqNum = 4;
+			boardLength = 7;
+			boardHeight = 6;
+		}
+	}
+	
+	//row & col would be the position it was just placed in	
+	public boolean gameOver(Board _board, Coin c, int row, int col) 
 	{
 		boolean isOver = false;	//win check used for this whole method
 		String currColor = c.getColor();	//player color
@@ -223,9 +153,6 @@ public class Board {
 		return isOver; //replace with isOver before done
 	}
 	
-    /**
-     * Navigates to the end of a sequence of coins
-     */
 	public void giveTail(Coin[][] c, int row, int col, String currColor, int direction)
 	{
 		boolean preemptiveTest;
