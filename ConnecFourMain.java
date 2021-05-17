@@ -34,7 +34,8 @@ public class ConnecFourMain extends Application {
         stage.setTitle("Connect Four");
 
         Player ai;
-        Player user;
+        Player user = new RealPlayer();
+        Player user2 = new RealPlayer();
 
         // Dimension of screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -125,7 +126,6 @@ public class ConnecFourMain extends Application {
             red_button.setSelected(false);
             ai_button_one.setSelected(false);
             ai_button_two.setSelected(false);
-            // instantiate two separate player
         });
 
         one_player_button.setOnAction(e -> {
@@ -136,29 +136,38 @@ public class ConnecFourMain extends Application {
             red_button.setSelected(false);
             ai_button_one.setSelected(false);
             ai_button_two.setSelected(false);
-            // instantiate player
         });
 
         yellow_button.setOnAction(e -> {
             // instantiate player with yellow coin
             settings.getChildren().setAll(one_player_settings, two_players_settings, ai_setting);
+            user.setColor("Yellow");
         });
 
         red_button.setOnAction(e -> {
             // instantiate player with red coin
             settings.getChildren().setAll(one_player_settings, two_players_settings, ai_setting);
+            user.setColor("Red");
         });
 
         ai_button_one.setOnAction(e -> {
             // instantiate simple ai
             ai_setting.getChildren().setAll(ai_label, ai_button_one, ai_button_two, play_button);
-            // ai = new FoolAI();
+            if (user.getColor().equalsTo("Red")) {
+                ai = new FoolAI("Yellow");
+            } else {
+                ai = new FoolAI("Red");
+            }
         });
 
         ai_button_two.setOnAction(e -> {
             // instantiate complex ai
             ai_setting.getChildren().setAll(ai_label, ai_button_one, ai_button_two, play_button);
-            // ai = new SmartAI();
+            if (user.getColor().equalsTo("Yellow")) {
+                ai = new FoolAI("Red");
+            } else {
+                ai = new FoolAI("Yellow");
+            }
         });
 
         play_button.setOnAction(e -> {
@@ -175,6 +184,7 @@ public class ConnecFourMain extends Application {
     }
 
     public void game(Stage secondary_stage) {
+        Board connectFourBoard = new Board();
 
         // creating the circle objects
         Circle[][] circle = new Circle[8][8];

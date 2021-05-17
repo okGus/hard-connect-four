@@ -22,8 +22,4 @@ public abstract class Player{
 		return b;
 		
 	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
 }
