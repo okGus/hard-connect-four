@@ -5,6 +5,9 @@ public class Board {
     private boolean connect_five = false;
     private int currHor, currVer, boardLength, boardHeight, seqNum;
 
+	/**
+	 * Initializes new board state
+	 */
     Board() {
         // Default 8x8 - connect four
         boardLength = 8;
@@ -18,10 +21,18 @@ public class Board {
         }
     }
 
+	/**
+	 * Initializes board state given row and column
+	 * @param row - row
+	 * @param col - column
+	 */
     Board(int row, int col) {
         _board = new Coin[row][col];
     }
 
+	/**
+	 * Displays everything in board
+	 */
     public void display() {
         for (int r = 0; r < _board.length; r++) {
             for (int c = 0; c < _board[r].length; c++) {
@@ -32,6 +43,12 @@ public class Board {
     }
 
     // insert new Coin and have update to setColor(getColor)
+	/**
+	 * Inserts Coin object on row and column
+	 * @param c - Coin
+	 * @param row - row
+	 * @param col - column
+	 */
     public void insert(Coin c, int row, int col) {
         if(_board[row][col] != null)
         {
@@ -58,12 +75,21 @@ public class Board {
         update(c, row, col);
     }
 
+	/**
+	 * Updates inserted Coin
+	 * @param c - Coin to insert
+	 * @param row - row 
+	 * @param col - column
+	 */
     private void update(Coin c, int row, int col) {
         _board[row][col].setColor(c.getColor());
         System.out.println("Checking over in update");
         boolean w = gameOver(this, c, row, col);
     }
 
+	/**
+	 * Changes from connect four state to connect five
+	 */
     public void five_in_a_row() {
         // connect five, 6x9
         _board = new Coin[6][9];
@@ -74,10 +100,18 @@ public class Board {
         connect_four = false;
     }
 
+	/**
+	 * Returns if we are on connect four
+	 * @return - connect_four
+	 */
     public boolean get_connect_four() {
         return connect_four;
     }
 
+	/**
+	 * Returns if we are on connect five
+	 * @return - connect_five
+	 */
     public boolean get_connect_five() {
         return connect_five;
     }

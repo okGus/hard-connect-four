@@ -4,6 +4,10 @@ import java.lang.Math;
 
 public class FoolAI extends Player implements playerInterface{
 
+	/**
+	 * Initializes FoolAI object with given color
+	 * @param color
+	 */
 	public FoolAI(String color)
 	{
 		super(color);

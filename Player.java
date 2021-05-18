@@ -5,6 +5,10 @@ public abstract class Player{
 
 	protected String color;
 	
+	/**
+	 * Initializes Player object given color
+	 * @param color
+	 */
 	public Player(String color)
 	{
 		this.color = color;
