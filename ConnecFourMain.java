@@ -32,10 +32,8 @@ public class ConnecFourMain extends Application {
     public void start(Stage stage) {
         // Set tile
         stage.setTitle("Connect Four");
-
-        Player ai;
-        Player user = new RealPlayer();
-        Player user2 = new RealPlayer();
+        Player user = new RealPlayer("Red");
+        Player user2 = new RealPlayer("Yellow");
 
         // Dimension of screen
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -153,20 +151,20 @@ public class ConnecFourMain extends Application {
         ai_button_one.setOnAction(e -> {
             // instantiate simple ai
             ai_setting.getChildren().setAll(ai_label, ai_button_one, ai_button_two, play_button);
-            if (user.getColor().equalsTo("Red")) {
-                ai = new FoolAI("Yellow");
+            if (user.getColor().equals("Red")) {
+                Player ai = new FoolAI("Yellow");
             } else {
-                ai = new FoolAI("Red");
+                Player ai = new FoolAI("Red");
             }
         });
 
         ai_button_two.setOnAction(e -> {
             // instantiate complex ai
             ai_setting.getChildren().setAll(ai_label, ai_button_one, ai_button_two, play_button);
-            if (user.getColor().equalsTo("Yellow")) {
-                ai = new FoolAI("Red");
+            if (user.getColor().equals("Yellow")) {
+                Player ai = new FoolAI("Red");
             } else {
-                ai = new FoolAI("Yellow");
+                Player ai = new FoolAI("Yellow");
             }
         });
 

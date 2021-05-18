@@ -1,8 +1,9 @@
-
+/**
+ * 
+ * @interface = player interface for player class
+ *
+ */
 public interface playerInterface {
 
-	Board act(Board b);
-	
-	public void setColor(String color);
-	public String getColor();
+	Board act(Board b,int r,int c);
 }

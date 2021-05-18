@@ -1,9 +1,15 @@
-public class RealPlayer extends Player implements playerInterface {
+/**
+ * This class is a subclass of the Player class, simulate the real player
+ *
+ */
+public class RealPlayer extends Player implements playerInterface 
+{
     public RealPlayer(String color) {
         super(color);
     }
 
     @Override
+    //@param = board passed from game, integer of the coordinates
     public Board act(Board b,int r, int c)
 	{
 		

@@ -26,4 +26,19 @@ public abstract class Player{
 		return b;
 		
 	}
+
+	/**
+	 * @return the color
+	 */
+	public String getColor() {
+		return color;
+	}
+
+	/**
+	 * @param color the color to set
+	 */
+	public void setColor(String color) {
+		this.color = color;
+	}
+	
 }
