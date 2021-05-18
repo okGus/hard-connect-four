@@ -226,7 +226,7 @@ public class ConnecFourMain extends Application {
                 circle[i][j].setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent e) {
-                        ((Shape) e.getSource()).setFill(Color.RED);
+                        ((Shape) e.getSource()).setFill(Color.BLUE);
                     }
                 });
 

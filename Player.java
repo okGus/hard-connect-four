@@ -5,10 +5,15 @@ public abstract class Player{
 
 	protected String color;
 	
+	/**
+	 * Initializes Player object given color
+	 * @param color
+	 */
 	public Player(String color)
 	{
 		this.color = color;
 	}
+
 	public Board act(Board b,int r, int c)
 	{
 		
@@ -21,9 +26,17 @@ public abstract class Player{
 		return b;
 		
 	}
+
+	/**
+	 * @return the color
+	 */
 	public String getColor() {
 		return color;
 	}
+
+	/**
+	 * @param color the color to set
+	 */
 	public void setColor(String color) {
 		this.color = color;
 	}

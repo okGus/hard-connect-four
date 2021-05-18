@@ -2,8 +2,12 @@ import java.lang.Math;
 //This is a fool AI that inserts coin at random position
 //@Param = Board for changing data inside
 
-public class FoolAI extends Player implements playerInterface{
+public class FoolAI extends Player implements AiInterface{
 
+	/**
+	 * Initializes FoolAI object with given color
+	 * @param color
+	 */
 	public FoolAI(String color)
 	{
 		super(color);
@@ -20,7 +24,7 @@ public class FoolAI extends Player implements playerInterface{
 		boolean checkC5 = b.get_connect_five();
 		//create a new coin which represent AI coin
 		Coin c = new Coin(color);
-				
+		Coin[][]bCoin = b.getBoard();
 		//int for taking value of the position where the AI is going to put the coin at
 		//default at [0,0], but will change later
 		int row = 0; 
@@ -41,7 +45,7 @@ public class FoolAI extends Player implements playerInterface{
 				col = (int)(Math.random() * 8-1+1) + 1;
 			}
 			//choose new number of row and col if there is coin in position the ai firstly choose
-			if(!(b.[row][col] == null))
+			if(!(bCoin[row][col] == null))
 			{
 				noValue = false;
 			}

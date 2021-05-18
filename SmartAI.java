@@ -3,7 +3,7 @@ import java.util.ArrayList;
 //This is a smart AI that use the max algorithm to decide where to insert the coin
 //@Param = Board for changing data inside
 
-public class SmartAI extends Player implements playerInterface{
+public class SmartAI extends Player implements AiInterface{
 	//aiWin,playerWin,tie = condition bools for terminal method
 	//scoreArray = store each determining score of the moves at the position for searching the coordinate of the best move later
 	private boolean aiWin = false;
