@@ -2,10 +2,8 @@
  * This class is a subclass of the Player class, simulate the real player
  *
  */
-
 public class RealPlayer extends Player implements playerInterface 
 {
-	//@param = String passed from ConnectFourMain.java 
     public RealPlayer(String color) {
         super(color);
     }

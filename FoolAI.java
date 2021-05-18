@@ -2,8 +2,7 @@ import java.lang.Math;
 //This is a fool AI that inserts coin at random position
 //@Param = Board for changing data inside
 
-public class FoolAI extends Player implements AiInterface{
-
+public class FoolAI extends Player implements playerInterface{
 	/**
 	 * Initializes FoolAI object with given color
 	 * @param color

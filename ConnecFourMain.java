@@ -32,7 +32,6 @@ public class ConnecFourMain extends Application {
     public void start(Stage stage) {
         // Set tile
         stage.setTitle("Connect Four");
-
         Player user = new RealPlayer("Red");
         Player user2 = new RealPlayer("Yellow");
 
